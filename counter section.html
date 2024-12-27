@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Counter Animation</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+
+    .counter-section {
+      background-image: url('https://img.freepik.com/free-photo/skyline-night-view-city-urban-building_1150-2360.jpg?t=st=1735275016~exp=1735278616~hmac=51a846d67f289648c3e447b8bb15cc5a931de45ae4c94c02eb503cfb6b9f6a3f&w=996') ;
+      text-align: center;
+      padding: 80px 20px;
+      position: relative;
+      color: #ffffff;
+    }
+    .counter-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(0, 0, 0, 0.6);
+      z-index: 1;
+    }
+    .counter-content {
+      position: relative;
+      z-index: 2;
+    }
+    .counter-title {
+      font-size: 2rem;
+      font-weight: bold;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+    }
+    .counter {
+      display: flex;
+      justify-content: center;
+      gap: 50px;
+      margin-top: 30px;
+    }
+    .counter-item {
+      text-align: center;
+    }
+    .counter-item .number {
+      font-size: 4rem;
+      font-weight: bold;
+    }
+    .counter-item .label {
+      font-size: 1.2rem;
+      margin-top: 10px;
+      color: #dddddd;
+    }
+    .number[data-color="blue"] {
+      color: #3498db;
+    }
+    .number[data-color="green"] {
+      color: #2ecc71;
+    }
+    .number[data-color="yellow"] {
+      color: #f1c40f;
+    }
+    .number[data-color="red"] {
+      color: #e74c3c;
+    }
+  </style>
+</head>
+<body>
+
+<div class="counter-section mt-4">
+  <div class="counter-content">
+    <div class="counter-title">3 Decades of Trust</div>
+    <div class="counter">
+      <div class="counter-item">
+        <div class="number" data-color="blue" data-target="140">0</div>
+        <div class="label">projects completed</div>
+      </div>
+      <div class="counter-item">
+        <div class="number" data-color="green" data-target="80">0</div>
+        <div class="label">million sqft in progress</div>
+      </div>
+      <div class="counter-item">
+        <div class="number" data-color="yellow" data-target="65">0</div>
+        <div class="label">million sqft completed</div>
+      </div>
+      <div class="counter-item">
+        <div class="number" data-color="red" data-target="8">0</div>
+        <div class="label">presence in cities</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const counters = document.querySelectorAll('.number');
+    const speed = 100; // Adjust to control speed of counting
+
+    counters.forEach(counter => {
+      const target = +counter.getAttribute('data-target');
+      const updateCount = () => {
+        const current = +counter.innerText;
+        const increment = Math.ceil(target / speed);
+
+        if (current < target) {
+          counter.innerText = current + increment;
+          setTimeout(updateCount, 20);
+        } else {
+          counter.innerText = target;
+        }
+      };
+      updateCount();
+    });
+  });
+</script>
+
+</body>
+</html>
